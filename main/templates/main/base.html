@@ -23,6 +23,9 @@
     <!-- Custom CSS -->
     <link href="{% static 'main/css/stylish-portfolio.min.css' %}" rel="stylesheet">
 
+    <!-- Fontawesome -->
+    <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
 
   <body id="page-top">
@@ -37,16 +40,16 @@
           <a class="js-scroll-trigger" href="#page-top">하연이 블로그</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href='{%url "main"%}'>Home</a>
+          <a class="js-scroll-trigger" href='{% url "main" %}'>Home</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#about">About</a>
+          <a class="js-scroll-trigger" href='{% url "main" %}#about'>About</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#portfolio">Posts</a>
+          <a class="js-scroll-trigger" href="{% url 'main' %}#portfolio">Posts</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#contact">Contact</a>
+          <a class="js-scroll-trigger" href="https://www.facebook.com/yonsei.likelion/">Contact</a>
         </li>
       </ul>
     </nav>

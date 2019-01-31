@@ -1,5 +1,14 @@
-{% extends 'main/base.html' %}
+<style>
+.oldColor{
+  color: gray
+}
 
+.newColor {
+  color: red
+}
+</style>
+
+{% extends 'main/base.html' %}
 {%block content%}
 
     <!-- About -->
@@ -20,19 +29,28 @@
  <section class="content-section" id="portfolio">
     <div class="container">
       <div class="content-section-heading text-center">
-        <h2>Posts</h2>
-        <h3 class="mb-5">방명록을 작성해주오</h3>
+        <h2>Posts</h2> 
+        <h3 class="mb-5">방명록을 작성해주오 
+          <a href='{% url "new" %}'><i class="fa fa-pencil"></i></a></h3>
       </div>
       {%for post in posts%}
-          <h1>{{post.title}}</h1>
+          <h1><a href='{% url "post_detail" post.pk %}'>{{post.title}}</a></h1>
                 <p>{{post.summary}}<a href='{% url "post_detail"  post.pk %}'>...more</a></p>
                 <p><em>{{post.created_at}} | by: {{post.author}}</em></p>
-          </a>
+          <hr>
     {%endfor%}
     </div>
 </section>
 
-
+ <!-- Callout -->
+ <section class="callout">
+    <div class="container text-center">
+      <h2 class="mx-auto mb-5">Welcome to
+        <em>2019</em>
+        Like Lion!</h2>
+      <a class="btn btn-primary btn-xl" href="https://class.likelion.org/">멋사 깨알 홍보</a>
+    </div>
+  </section>
 {% endblock %}
 
  <!-- Callout -->
@@ -44,3 +62,9 @@
       <a class="btn btn-primary btn-xl" href="https://class.likelion.org/">멋사 깨알 홍보</a>
     </div>
   </section>
+
+  <!-- <script>
+    $(".fa fa-pencil").click(function(){
+      $(this).toggleClass('oldColor', 'newColor');
+    })
+  </script> -->

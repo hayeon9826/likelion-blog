@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post
+from .forms import PostForm
+from django.utils import timezone
 
 # Create your views here.
 def main(request):
@@ -15,3 +17,17 @@ def post_detail(request, post_id):
  
 def base(request):
     return render(request, 'main/base.html')
+
+def new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', post.pk)
+    else: 
+        form = PostForm()
+    return render(request, 'main/post_new.html', {'form' : form})
+
