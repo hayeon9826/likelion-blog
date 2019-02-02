@@ -6,6 +6,24 @@
 .newColor {
   color: red
 }
+
+
+
+.pagination a {
+  color: black;
+  float: right;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
 </style>
 
 {% extends 'main/base.html' %}
@@ -39,8 +57,34 @@
                 <p><em>{{post.created_at}} | by: {{post.author}}</em></p>
           <hr>
     {%endfor%}
+
+    {% if posts.has_other_pages %}
+    
+  <div class="pagination">
+    {% if posts.has_previous %}
+      <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </div>
+{% endif %}
+
     </div>
 </section>
+
+
 
  <!-- Callout -->
  <section class="callout">
@@ -53,15 +97,7 @@
   </section>
 {% endblock %}
 
- <!-- Callout -->
- <section class="callout">
-    <div class="container text-center">
-      <h2 class="mx-auto mb-5">Welcome to
-        <em>2019</em>
-        Like Lion!</h2>
-      <a class="btn btn-primary btn-xl" href="https://class.likelion.org/">멋사 깨알 홍보</a>
-    </div>
-  </section>
+
 
   <!-- <script>
     $(".fa fa-pencil").click(function(){

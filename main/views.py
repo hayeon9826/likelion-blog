@@ -2,11 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post
 from .forms import PostForm
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 # Create your views here.
 def main(request):
-    post = Post.objects.all().order_by('-id')[:10]
-    return render(request, 'main/main.html', {'posts': post})
+    post_list = Post.objects.all().order_by('-id')
+    paginator = Paginator(post_list, 5)
+
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'main/main.html', {'posts': posts})
 
 def post_detail(request, post_id):
     posting = get_object_or_404(Post, pk=post_id)
@@ -30,4 +35,9 @@ def new(request):
     else: 
         form = PostForm()
     return render(request, 'main/post_new.html', {'form' : form})
+
+def post_remove(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    post.delete()
+    return redirect('main')
 

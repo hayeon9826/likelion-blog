@@ -8,12 +8,16 @@
             {% if post.published_date %}
                 <div class="date">
                     {{ post.published_date }}
+                    <i>by {{post.author}}</i>
                 </div>
             {% endif %}
             <h1>{{ post.title }}</h1><hr>
             <p>{{ post.text|linebreaksbr }}</p>
-            <i>작가: {{post.author}}</i><br><hr>
+            <br>
+            <a href="{% url 'post_remove' post.pk %}">게시글 삭제</a>
+            <hr>
             <a href='{%url "main"%}'>뒤로가기</a>
+            
             <!-- </div> -->
         </div>
     </section>
