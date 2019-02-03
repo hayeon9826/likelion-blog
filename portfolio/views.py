@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import os
 from django.http import HttpResponse
 from django.conf import settings
 from .models import Portfolio
+from .forms import PortfolioForm
+from django.utils import timezone
 
 # Create your views here.
 
@@ -18,3 +20,15 @@ def pdf_download(request):
         response = HttpResponse(f, content_type = 'application/pdf')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
         return response
+
+def new_portfolio(request):
+    if request.method == "POST":
+        form = PortfolioForm(request.POST, request.FILES)
+        if form.is_valid():
+            portfolio = form.save(commit=False)
+            portfolio.published_at = timezone.now()
+            portfolio.save()
+            return redirect('portfolio')
+    else:
+        form = PortfolioForm()
+    return render(request, 'portfolio/new.html', {'form':form})

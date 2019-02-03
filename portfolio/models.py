@@ -13,13 +13,16 @@ class Portfolio(models.Model):
         ('제목2', '교내활동'),
         ('제목3', '교외활동'),
     ))
-    discription = models.CharField(max_length = 500)
+    description = models.CharField(max_length = 500)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    published_at = models.DateTimeField(blank=True, null=True)
     #file upload!
+    def publish(self):
+        self.published_at = timezone.new()
+        self.save
 
     def __str__(self):
         return self.title
 
     def summary(self):
-        return self.discription[:50]
+        return self.description[:50]

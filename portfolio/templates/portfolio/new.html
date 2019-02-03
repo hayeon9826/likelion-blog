@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{%block content%}
+
+<section class="content-section" id="portfolio">
+    <div class="container">
+    <h1>새 포트폴리오 작성</h1><hr>
+        <div class="content-section-heading"> 
+        <form method = "POST" class="post-form" action='{{portfolio}}' enctype='multipart/form-data'>{% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="save btn btn-default">저장</button>
+        </form>
+
+        </div><br>
+        <a href='{%url "portfolio"%}'>뒤로가기</a>
+    </div>
+</section>
+
+{% endblock %}

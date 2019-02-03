@@ -1,7 +1,7 @@
 from django import forms
 from .models import Portfolio
 
-class PotfolioForm(forms.ModelForm):
+class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ('author', 'title', 'image', 'category', 'discription')
+        fields = ('author', 'title', 'image', 'category', 'description')
