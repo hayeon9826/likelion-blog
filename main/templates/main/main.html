@@ -51,11 +51,18 @@
         <h3 class="mb-5">방명록을 작성해주오 
           <a href='{% url "new" %}'><i class="fa fa-pencil"></i></a></h3>
       </div>
+      
+
+
       {%for post in posts%}
-          <h1><a href='{% url "post_detail" post.pk %}'>{{post.title}}</a></h1>
-                <p>{{post.summary}}<a href='{% url "post_detail"  post.pk %}'>...more</a></p>
-                <p><em>{{post.created_at}} | by: {{post.author}}</em></p>
-          <hr>
+      <div class="card" style="width: 68rem;">
+        <div class="card-body">
+          <h1><a href='{% url "post_detail" post.pk %}' class="card-title">{{post.title}}</a></h1>
+          <h6 class="card-subtitle mb-2 text-muted"> by: {{post.author}}</h6>
+                <p class="card-text">{{post.summary}}<a href='{% url "post_detail"  post.pk %}'>...more</a></p>
+                <p class="card-link"><em>Published at: {{post.published_date}}</em></p>
+          </div>
+        </div><br>
     {%endfor%}
 
     {% if posts.has_other_pages %}

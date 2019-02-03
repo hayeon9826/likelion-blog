@@ -22,4 +22,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('main.urls')),
     url(r'portfolio', include('portfolio.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #올린 이미지 읽어올 수 있게

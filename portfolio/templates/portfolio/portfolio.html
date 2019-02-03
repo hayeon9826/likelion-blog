@@ -15,10 +15,6 @@ img{
 {% extends 'main/base.html' %}
 {% load static %}
 
-<link href="{% static 'css/myportfolio.css' %}" rel="stylesheet">
-<script src="{% static 'js/port_script.js' %}"></script>
-
-
 {% block content %}
 
 <section class="content-section bg-light" id="portfolio">
@@ -28,7 +24,7 @@ img{
           <h1>하연's 포트폴리오</h1>
           <p class="lead mb-5">2019 연세대학교 멋쟁이 사자처럼</p>
         <div id="myImg">
-          <img  src="{% static 'img/likelion__khy__.PNG'%}" alt="이것은 2018 멋사 수료증!" >
+          <img  src="{% static 'portfolio/img/likelion__khy__.PNG'%}" alt="이것은 2018 멋사 수료증!" >
         </div><br>
           <a href = "{%url 'download'%}">파일 다운받기</a>
        <br><br>
@@ -69,7 +65,9 @@ img{
       </div>
     </div>
   </div>
-
- 
+  <link href="{% static 'portfolio/css/myportfolio.css' %}" rel="stylesheet">
+  <script src="{% static 'portfolio/js/port_script.js' %}"></script>
+  
 
 {% endblock %}
+
