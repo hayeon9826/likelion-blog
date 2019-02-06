@@ -9,9 +9,9 @@ class Portfolio(models.Model):
     # 업로드된 이미지들을 images 폴더안에 넣으라
     category = models.CharField( max_length=10, default = True,
     choices = (
-        ('제목1', '자격증'),
-        ('제목2', '교내활동'),
-        ('제목3', '교외활동'),
+        ('자격증', '자격증'),
+        ('교내활동', '교내활동'),
+        ('교외활동', '교외활동'),
     ))
     description = models.CharField(max_length = 500)
     created_at = models.DateTimeField(auto_now_add=True)

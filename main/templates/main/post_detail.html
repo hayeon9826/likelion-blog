@@ -14,7 +14,8 @@
             <h1>{{ post.title }}</h1><hr>
             <p>{{ post.text|linebreaksbr }}</p>
             <br>
-            <a href="{% url 'post_remove' post.pk %}">게시글 삭제</a>
+            <button type="button" class="btn btn-default" id="delete"><a href="{% url 'post_remove' post.pk %}" onclick="return confirm('해당 게시글을 삭제하시겠습니까?');">게시글 삭제</a></button>
+            <button type="button" class="btn btn-default"><a href = "{%url 'post_edit' post.pk%}">수정</a></button>
             <hr>
             <a href='{%url "main"%}'>뒤로가기</a>
             

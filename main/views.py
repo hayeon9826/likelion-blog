@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def main(request):
-    post_list = Post.objects.all().order_by('-id')
+    post_list = Post.objects.all().order_by('-published_date')
     paginator = Paginator(post_list, 5)
 
     page = request.GET.get('page')
@@ -33,6 +33,20 @@ def new(request):
             return redirect('post_detail', post.pk)
     else: 
         form = PostForm()
+    return render(request, 'main/post_new.html', {'form' : form})
+
+def post_edit(request, post_id):
+    if request.method == "POST":
+        posting = get_object_or_404(Post, pk=post_id)
+        form = PostForm(request.POST, instance = posting)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', post.pk)
+    else:
+        posting = get_object_or_404(Post, pk=post_id)
+        form = PostForm(instance = posting)
     return render(request, 'main/post_new.html', {'form' : form})
 
 def post_remove(request, post_id):

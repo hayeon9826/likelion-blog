@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{%block content%}
+
+<section class="content-section" id="portfolio">
+    <div class="container">
+      <!-- <div class="content-section-heading text-center">    -->
+        {% if portfolio.published_at %}
+            <div class="date">
+                {{ portfolio.published_date }}
+                <i>by {{portfolio.author}}</i><br>
+                카테고리: {{portfolio.category}}
+            </div>
+        {% endif %}
+        <h1>{{ portfolio.title }}</h1><hr>
+        <img class="card-img-top" style="height: 50%; width: 50%; display: block;" src = "{{portfolio.image.url}}"><hr>
+        <p>{{ portfolio.description|linebreaksbr }}</p>
+        <br>
+        <button type="button" class="btn btn-default" id="delete"><a href="{% url 'portfolio_remove' portfolio.pk %}" onclick="return confirm('해당 게시글을 삭제하시겠습니까?');">삭제</a></button>
+        <hr>
+        <a href='{%url "portfolio"%}'>뒤로가기</a>
+        
+        <!-- </div> -->
+    </div>
+</section>
+
+
+{% endblock %}

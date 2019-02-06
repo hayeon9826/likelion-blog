@@ -23,8 +23,8 @@ img{
         <div class="col-lg-10 mx-auto">
           <h1>하연's 포트폴리오</h1>
           <p class="lead mb-5">2019 연세대학교 멋쟁이 사자처럼</p>
-        <div id="myImg">
-          <img  src="{% static 'portfolio/img/likelion__khy__.PNG'%}" alt="이것은 2018 멋사 수료증!" >
+        <div>
+          <img src="{% static 'portfolio/img/likelion__khy__.PNG'%}" alt="이것은 2018 멋사 수료증!" id="myImg">
         </div><br>
           <a href = "{%url 'download'%}">파일 다운받기</a>
        <br><br>
@@ -34,11 +34,27 @@ img{
     </div>
   </section>
 <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">수료증 자세히 보기</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img class="modal-content" id="img01">
+          </div>
+          <div id="caption"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
+
 
 <div class="album py-5 bg-dark" id="portfolio-chart">
     <div class="container">
@@ -52,7 +68,7 @@ img{
               <p class="card-text">{{p.summary}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href = "{%url 'portfolio_detail' p.pk %}">View</a></button>
                   <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </div>
                 <small class="text-muted">{{p.author}}</small>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import os
 from django.http import HttpResponse
 from django.conf import settings
@@ -32,3 +32,12 @@ def new_portfolio(request):
     else:
         form = PortfolioForm()
     return render(request, 'portfolio/new.html', {'form':form})
+
+def portfolio_detail(request, portfolio_id):
+        post = get_object_or_404(Portfolio, pk=portfolio_id)
+        return render(request, 'portfolio/detail.html', {'portfolio' :post})
+
+def portfolio_remove(request, pk):
+        portfolio = get_object_or_404(Portfolio, pk=pk)
+        portfolio.delete()
+        return redirect ('portfolio')
