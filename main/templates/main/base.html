@@ -52,6 +52,23 @@
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="https://www.facebook.com/yonsei.likelion/">Contact</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="sidebar-nav-item">
+            <a class = 'js-scroll-trigger'>환영합니다. {{user.username}}님!</a>
+            <a class = 'js-scroll-trigger' href='javascript:{document.getElementById("logout").submit()}'>Logout</a>
+            <form id="logout" method = "POST" action="{% url 'logout' %}">
+              {% csrf_token %}<input type="hidden"/>
+            </form>
+
+          </li>
+        {% else %}
+        <li class="sidebar-nav-item">
+          <a class = 'js-scroll=trigger' href="{% url 'signup' %}">회원가입</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a class = 'js-scroll-trigger' href="{% url 'login' %}">로그인</a>
+        </li>
+        {% endif %}
       </ul>
     </nav>
 
@@ -66,6 +83,7 @@
       </div>
       <div class="overlay"></div>
     </header>
+
 
 
 

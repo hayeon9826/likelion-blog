@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br>
+<br>
+{% endif %}
+
+<section class="content-section" id="portfolio">
+    <div class="container">
+            <h1>로그인</h1><hr>
+      <div class="content-section-heading">  
+        <form method="POST" action="{% url 'login'%}">
+            {% csrf_token %}
+            Username:
+            <br>
+            <input name='username' type='text' value=''>
+            <br>
+            Password:
+            <br>
+            <input name='password' type='password' value=''>
+            <br>
+            <br>
+            <input class='btn btn-primary' type='submit' value='Login'>
+        </form>
+                
+        </div><br>
+        <a href='{%url "main"%}'>뒤로가기</a>
+    </div>
+</section>
+{% endblock %}

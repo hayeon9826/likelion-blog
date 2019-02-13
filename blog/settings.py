@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'django_extensions',
     'portfolio',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static') #static 파일들을 최종적으
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# #기본 로그인 페이지 url, login_required 장식자 등에 의해서 사용
+# LOGIN_URL = '/accounts/login/'
+# #로그인 완료후 next 인자 지정시 해당 url로 이동 / 없으면 본 url로 이동
+# LOGIN_REDIRECT_URL = '/accounts/profile/'
+
+# #로그아웃 후 next page 인자 지정되지 않고 LOGOUT_REDIRECT_URL이 None 일 경우
+# #redirect 수행하지 않고, 'registration/logged_out.html' 템플릿 렌더링
+# LOGOUT_REDIRECT_URL = None
+
+# #인증에 사용할 커스텀 User 모델 지정, '앱이름.모델명'
+# AUTH_USER_MODEL = 'auth.User'
+
+# #email activation keys 가 유효한 날짜
+# ACCOUNT_ACTIVATION_DAYS = 2
+# # EMAIL_HOST = 'localhost'
+# # DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+# # LOGIN_REDIRECT_URL = '/'

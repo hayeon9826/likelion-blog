@@ -15,7 +15,7 @@
         <img class="card-img-top" style="height: 50%; width: 50%; display: block;" src = "{{portfolio.image.url}}"><hr>
         <p>{{ portfolio.description|linebreaksbr }}</p>
         <br>
-        <button type="button" class="btn btn-default" id="delete"><a href="{% url 'portfolio_remove' portfolio.pk %}" onclick="return confirm('해당 게시글을 삭제하시겠습니까?');">삭제</a></button>
+        <button type="button" class="btn btn-default" id="delete"><a href="{% url 'portfolio_remove' portfolio.pk %}">삭제</a></button>
         <hr>
         <a href='{%url "portfolio"%}'>뒤로가기</a>
         

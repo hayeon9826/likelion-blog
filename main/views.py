@@ -3,6 +3,8 @@ from main.models import Post
 from .forms import PostForm
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def main(request):
@@ -23,18 +25,21 @@ def post_detail(request, post_id):
 def base(request):
     return render(request, 'main/base.html')
 
+@login_required
 def new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.published_date = timezone.now()
+            post.author = request.user
             post.save()
             return redirect('post_detail', post.pk)
     else: 
         form = PostForm()
     return render(request, 'main/post_new.html', {'form' : form})
 
+@login_required
 def post_edit(request, post_id):
     if request.method == "POST":
         posting = get_object_or_404(Post, pk=post_id)
@@ -42,6 +47,7 @@ def post_edit(request, post_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.published_date = timezone.now()
+            post.author = request.user
             post.save()
             return redirect('post_detail', post.pk)
     else:
@@ -49,8 +55,13 @@ def post_edit(request, post_id):
         form = PostForm(instance = posting)
     return render(request, 'main/post_new.html', {'form' : form})
 
+@login_required
 def post_remove(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    post.delete()
-    return redirect('main')
-
+    if request.user != post.author:
+        messages.error(request, '삭제 권한이 없습니다.')
+        return redirect('post_detail', post.pk)
+    else:
+        post.delete()
+        messages.success(request, '게시물이 성공적으로 삭제되었습니다')
+        return redirect('main')
