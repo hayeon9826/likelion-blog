@@ -1,1 +1,1 @@
-log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), router))
+web: python blog/manage.py runserver 0.0.0.0:$PORT
